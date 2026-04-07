@@ -1,20 +1,35 @@
-
 <!DOCTYPE html>
 <html>
 <head>
 <title>Poems 💌</title>
+
 <style>
 body {
-    background: #ffe5ec;
+    background: linear-gradient(135deg, #ffe5ec, #ffc2d1);
     font-family: Arial;
     text-align: center;
     padding: 50px;
+    animation: fadeIn 1.5s ease;
 }
 
-p {
-    font-size: 20px;
-    margin: 20px;
-    color: #6a0572;
+.card {
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(10px);
+    margin: 20px auto;
+    padding: 20px;
+    width: 300px;
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(20px);}
+    to {opacity: 1; transform: translateY(0);}
 }
 </style>
 </head>
@@ -23,9 +38,34 @@ p {
 
 <h1>For You 💖</h1>
 
-<p>You are my today and all of my tomorrows ❤️</p>
-<p>Every moment with you feels like magic ✨</p>
-<p>I didn't choose you… my heart did 💘</p>
+<div class="card">You are my today and all of my tomorrows ❤️</div>
+<div class="card">Every moment with you feels like magic ✨</div>
+<div class="card">I didn't choose you… my heart did 💘</div>
+
+<script>
+// hearts
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.innerHTML = "💖";
+    heart.style.position = "fixed";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.top = "100vh";
+    heart.style.fontSize = (Math.random() * 20 + 20) + "px";
+    document.body.appendChild(heart);
+
+    let pos = 100;
+    const fall = setInterval(() => {
+        pos -= 1;
+        heart.style.top = pos + "vh";
+        if (pos < -10) {
+            clearInterval(fall);
+            heart.remove();
+        }
+    }, 30);
+}
+
+setInterval(createHeart, 300);
+</script>
 
 </body>
 </html>
